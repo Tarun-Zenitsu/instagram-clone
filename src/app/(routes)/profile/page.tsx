@@ -7,7 +7,7 @@ const page = () => {
   return (
     <main>
       <section className="flex justify-between items-center">
-        <Link href="/setting">
+        <Link href="/">
           <ChevronLeft />
         </Link>
         <div className="font-bold flex items-center gap-2">
