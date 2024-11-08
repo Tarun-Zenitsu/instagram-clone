@@ -1,17 +1,25 @@
 import PostGrid from "@/app/components/PostGrid";
+import { prisma } from "@/app/components/db";
+import { auth } from "@/auth";
 import { CheckIcon, ChevronLeft, Settings } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-const page = () => {
+const ProfilePage = async () => {
+  const session = await auth();
+  const profile = await prisma.profile.findFirstOrThrow({
+    where: {
+      email: session?.user?.email || "",
+    },
+  });
   return (
     <main>
       <section className="flex justify-between items-center">
         <Link href="/">
           <ChevronLeft />
         </Link>
-        <div className="font-bold flex items-center gap-2">
-          my_name_is_tarun
+        <div className="font-bold flex items-center gap-1">
+          {profile.username}
           <div className="size-5 rounded-full bg-ig-red inline-flex justify-center items-center text-white">
             <CheckIcon size={16} />
           </div>
@@ -25,7 +33,9 @@ const page = () => {
           <div className="size-44 p-2 bg-white rounded-full">
             <div className="size-40 aspect-square overflow-hidden rounded-full">
               <img
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={
+                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                }
                 alt=""
               />
             </div>
@@ -33,11 +43,11 @@ const page = () => {
         </div>
       </section>
       <section className="text-center">
-        <h1 className="text-xl font-bold">Tarun</h1>
-        <p className="text-gray-500 my-1">Business account</p>
+        <h1 className="text-xl font-bold">{profile.name}</h1>
+        <p className="text-gray-500 my-1">{profile.subtitle}</p>
         <p>
-          Entrepreneur , Devloper <br />
-          contact: tarun@gmail.com
+          {profile.bio} <br />
+          contact: {profile.email}
         </p>
       </section>
       <section>
@@ -56,4 +66,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProfilePage;
