@@ -1,11 +1,9 @@
 "use client";
 
-import { auth } from "@/auth";
 import { Button, TextArea, TextField } from "@radix-ui/themes";
 import { CloudUploadIcon } from "lucide-react";
 import { redirect } from "next/navigation";
-import React from "react";
-import { prisma } from "./db";
+import React, { useEffect, useRef, useState } from "react";
 import { updateProfile } from "./actions";
 import { Profile } from "@prisma/client";
 
@@ -16,6 +14,21 @@ const SettingsForm = ({
   userEmail: string;
   profile: Profile;
 }) => {
+  const fileInputRef = useRef<HTMLInputElement>();
+  const [file, setFile] = useState<File>();
+  const [avatarUrl, setAvatarUrl] = useState(profile.avatar);
+  useEffect(() => {
+    if (file) {
+      const data = new FormData();
+      data.set("file", file);
+      fetch("/api/upload", {
+        method: "POST",
+        body: data,
+      }).then((res) => {
+        res.json().then((url) => setAvatarUrl(url));
+      });
+    }
+  }, [file]);
   return (
     <form
       action={async (data: FormData) => {
@@ -23,10 +36,28 @@ const SettingsForm = ({
         redirect("/profile");
       }}
     >
+      <input type="hidden" name="avatar" value={avatarUrl as string} />
       <div className="flex gap-8 items-center">
-        <div className="bg-gray-500 size-24 rounded-full" />
+        <div className="bg-gray-500 rounded-full aspect-square">
+          <img
+            src={avatarUrl as string}
+            alt={avatarUrl as string}
+            className="size-24 rounded-full overflow-hidden shadow-md border-gray-400"
+          />
+        </div>
         <div>
-          <Button variant="surface" size="4">
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={(e) => setFile(e.target.files?.[0])}
+          />
+          <Button
+            variant="surface"
+            size="4"
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+          >
             <CloudUploadIcon />
             Change Avatar
           </Button>

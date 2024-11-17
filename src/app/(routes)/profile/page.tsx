@@ -32,12 +32,7 @@ const ProfilePage = async () => {
         <div className="size-48 p-2 bg-gradient-to-tr from-ig-orange to-ig-red rounded-full">
           <div className="size-44 p-2 bg-white rounded-full">
             <div className="size-40 aspect-square overflow-hidden rounded-full">
-              <img
-                src={
-                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                }
-                alt=""
-              />
+              <img src={profile.avatar as string} alt={profile.username} />
             </div>
           </div>
         </div>
