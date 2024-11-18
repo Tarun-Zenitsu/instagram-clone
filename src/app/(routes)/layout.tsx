@@ -3,6 +3,16 @@ import localFont from "next/font/local";
 import "../globals.css";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
+import Link from "next/link";
+import {
+  CameraIcon,
+  GridIcon,
+  HomeIcon,
+  LayoutGridIcon,
+  SearchIcon,
+  UserIcon,
+} from "lucide-react";
+import MobileNav from "../components/MobileNav";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -30,7 +40,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased p-4`}
       >
-        <Theme>{children}</Theme>
+        <Theme>
+          {children}
+          <MobileNav />
+        </Theme>
       </body>
     </html>
   );
