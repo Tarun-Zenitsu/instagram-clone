@@ -14,7 +14,7 @@ const SettingsForm = ({
   userEmail: string;
   profile: Profile;
 }) => {
-  const fileInputRef = useRef<HTMLInputElement>();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File>();
   const [avatarUrl, setAvatarUrl] = useState(profile.avatar);
   useEffect(() => {
@@ -32,7 +32,7 @@ const SettingsForm = ({
   return (
     <form
       action={async (data: FormData) => {
-        await updateProfile(data, userEmail);
+        await updateProfile(data);
         redirect("/profile");
       }}
     >
