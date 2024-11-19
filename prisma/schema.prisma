@@ -32,3 +32,12 @@ model Post {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model comment {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    author      String
+    postId      String   @db.ObjectId
+    text        String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}

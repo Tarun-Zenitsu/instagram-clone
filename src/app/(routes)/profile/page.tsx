@@ -1,9 +1,10 @@
 import PostGrid from "@/app/components/PostGrid";
+import ProfilePosts from "@/app/components/ProfilePost";
 import { prisma } from "@/app/components/db";
 import { auth } from "@/auth";
 import { CheckIcon, ChevronLeft, Settings } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 
 const ProfilePage = async () => {
   const session = await auth();
@@ -54,7 +55,9 @@ const ProfilePage = async () => {
           </Link>
         </div>
         <section className="mt-4">
-          <PostGrid />
+          <Suspense fallback="Loading....">
+            <ProfilePosts email={profile.email} />
+          </Suspense>
         </section>
       </section>
     </main>

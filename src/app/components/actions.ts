@@ -37,18 +37,6 @@ export async function updateProfile(data: FormData) {
   });
 }
 
-// export async function postEntry(data: FormData) {
-//   const sessionEmail = await getSessionEmailOrThrow();
-//   const postDoc = await prisma.post.create({
-//     data: {
-//       author: sessionEmail,
-//       image: data.get("image") as string,
-//       description: data.get("description") as string | "",
-//     },
-//   });
-//   return postDoc.id;
-// }
-
 export async function postEntry(data: FormData) {
   const sessionEmail = await getSessionEmailOrThrow();
   const postDoc = await prisma.post.create({
@@ -59,4 +47,15 @@ export async function postEntry(data: FormData) {
     },
   });
   return postDoc.id;
+}
+
+export async function postComment(data: FormData) {
+  const authorEmail = await getSessionEmailOrThrow();
+  return prisma.comment.create({
+    data: {
+      author: authorEmail,
+      text: data.get("text") as string,
+      postId: data.get("postId") as string,
+    },
+  });
 }

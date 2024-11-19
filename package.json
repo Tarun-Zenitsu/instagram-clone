@@ -11,6 +11,8 @@
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "@radix-ui/themes": "^3.1.4",
+    "date-fns": "^4.1.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.454.0",
     "next": "15.0.2",
     "next-auth": "^5.0.0-beta.25",
@@ -19,6 +21,7 @@
     "react-dom": "19.0.0-rc-02c0e824-20241028"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.13",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
