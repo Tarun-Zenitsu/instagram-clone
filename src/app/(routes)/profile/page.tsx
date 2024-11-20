@@ -1,4 +1,3 @@
-import PostGrid from "@/app/components/PostGrid";
 import ProfilePosts from "@/app/components/ProfilePost";
 import { prisma } from "@/app/components/db";
 import { auth } from "@/auth";
@@ -10,7 +9,7 @@ const ProfilePage = async () => {
   const session = await auth();
   const profile = await prisma.profile.findFirstOrThrow({
     where: {
-      email: session?.user?.email || "",
+      email: session?.user?.email as string,
     },
   });
   return (

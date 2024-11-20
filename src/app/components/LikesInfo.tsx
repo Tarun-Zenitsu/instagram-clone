@@ -11,7 +11,7 @@ const LikesInfo = ({
   sessionLike,
 }: {
   post: Post;
-  sessionLike: Like;
+  sessionLike: Like | null;
 }) => {
   const router = useRouter();
   const [likedByMe, setLikedByMe] = useState(!!sessionLike);
@@ -35,7 +35,7 @@ const LikesInfo = ({
             className={likedByMe ? "text-red-500 fill-red-500" : " "}
           />
         </button>
-        {post.likesCount} people like this.
+        {post.likesCount} peoples like this.
       </div>
     </form>
   );
