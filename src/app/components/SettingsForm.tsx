@@ -7,16 +7,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { updateProfile } from "./actions";
 import { Profile } from "@prisma/client";
 
-const SettingsForm = ({
-  userEmail,
-  profile,
-}: {
-  userEmail: string;
-  profile: Profile;
-}) => {
+const SettingsForm = ({ profile }: { profile: Profile | null }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File>();
-  const [avatarUrl, setAvatarUrl] = useState(profile.avatar);
+  const [avatarUrl, setAvatarUrl] = useState(profile?.avatar);
   useEffect(() => {
     if (file) {
       const data = new FormData();
@@ -67,27 +61,27 @@ const SettingsForm = ({
       <TextField.Root
         name="username"
         placeholder="your_username"
-        defaultValue={profile.username}
+        defaultValue={profile?.username}
       />
       <p className="mt-2 font-bold">Name:</p>
       <TextField.Root
         name="name"
         placeholder="Jon Doe"
-        defaultValue={profile.name as string}
+        defaultValue={profile?.name || ""}
       />
 
       <p className="mt-2 font-bold">Subtitle:</p>
       <TextField.Root
         name="subtitle"
         placeholder="Web Developer"
-        defaultValue={profile.subtitle as string}
+        defaultValue={profile?.subtitle || ""}
       />
 
       <p className="mt-2 font-bold">Bio:</p>
       <TextArea
         name="bio"
         placeholder="Tell us about yourself..."
-        defaultValue={profile.bio as string}
+        defaultValue={profile?.bio || ""}
       />
 
       <div className="mt-2 flex justify-center">
