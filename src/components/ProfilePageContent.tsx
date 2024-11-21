@@ -4,7 +4,13 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import ProfilePosts from "./ProfilePost";
 
-export const ProfilePageContent = ({ profile }: { profile: Profile }) => {
+export const ProfilePageContent = ({
+  profile,
+  isOurProfile = false,
+}: {
+  profile: Profile;
+  isOurProfile?: boolean;
+}) => {
   return (
     <main>
       <section className="flex justify-between items-center">
@@ -17,9 +23,13 @@ export const ProfilePageContent = ({ profile }: { profile: Profile }) => {
             <CheckIcon size={16} />
           </div>
         </div>
-        <Link href="/settings">
-          <Settings />
-        </Link>
+        <div>
+          {isOurProfile && (
+            <Link href="/settings">
+              <Settings />
+            </Link>
+          )}
+        </div>
       </section>
       <section className="mt-7 flex justify-center">
         <div className="size-48 p-2 bg-gradient-to-tr from-ig-orange to-ig-red rounded-full">

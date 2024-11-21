@@ -1,7 +1,4 @@
 import React from "react";
-import { prisma } from "./db";
-import { uniq } from "lodash";
-import { getSessionEmailOrThrow } from "./actions";
 import Comment from "./Comment";
 import SessionCommentForm from "./SessionCommentForm";
 import LikesInfo from "./LikesInfo";
