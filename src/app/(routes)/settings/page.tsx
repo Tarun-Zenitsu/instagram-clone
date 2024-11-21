@@ -1,5 +1,5 @@
-import SettingsForm from "@/app/components/SettingsForm";
-import { prisma } from "@/app/components/db";
+import SettingsForm from "@/components/SettingsForm";
+import { prisma } from "@/components/db";
 import { auth, signOut } from "@/auth";
 import { Button } from "@radix-ui/themes";
 import React from "react";

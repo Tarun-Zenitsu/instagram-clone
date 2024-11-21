@@ -1,6 +1,6 @@
-import Modal from "@/app/components/Modal";
-import SinglePostContent from "@/app/components/SinglePostContent";
-import { getSinglePostData } from "@/app/components/actions";
+import Modal from "@/components/Modal";
+import SinglePostContent from "@/components/SinglePostContent";
+import { getSinglePostData } from "@/components/actions";
 import React from "react";
 
 const PostInModal = async ({ params }: { params: { id: string } }) => {

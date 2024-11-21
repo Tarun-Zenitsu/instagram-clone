@@ -1,6 +1,6 @@
 "use client";
 
-import { postEntry } from "@/app/components/actions";
+import { postEntry } from "@/components/actions";
 import { Button, TextArea } from "@radix-ui/themes";
 import { SendIcon, UploadCloudIcon } from "lucide-react";
 import { useRouter } from "next/navigation";

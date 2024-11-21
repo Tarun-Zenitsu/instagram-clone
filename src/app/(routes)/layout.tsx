@@ -12,8 +12,8 @@ import {
   SearchIcon,
   UserIcon,
 } from "lucide-react";
-import MobileNav from "../components/MobileNav";
-import DesktopNav from "../components/DesktopNav";
+import MobileNav from "../../components/MobileNav";
+import DesktopNav from "../../components/DesktopNav";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",

@@ -1,5 +1,5 @@
-import SinglePostContent from "@/app/components/SinglePostContent";
-import { getSinglePostData } from "@/app/components/actions";
+import SinglePostContent from "@/components/SinglePostContent";
+import { getSinglePostData } from "@/components/actions";
 
 const SinglePostPage = async ({ params }: { params: { id: string } }) => {
   const id = await params.id;
