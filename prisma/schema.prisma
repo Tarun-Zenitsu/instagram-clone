@@ -48,3 +48,11 @@ model Like {
     author      String
     createdAt   DateTime @default(now())
 }
+
+model Follower {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  followingProfileEmail String
+  followingProfileId    String   @db.ObjectId
+  followedProfileId     String   @db.ObjectId
+  createdAt             DateTime @default(now())
+}

@@ -133,3 +133,28 @@ export async function getSinglePostData(postId: string) {
     myLike,
   };
 }
+
+export async function followProfile(profileIdToFollow: string) {
+  const sessionProfile = await prisma.profile.findFirstOrThrow({
+    where: { email: await getSessionEmailOrThrow() },
+  });
+  await prisma.follower.create({
+    data: {
+      followingProfileEmail: sessionProfile.email,
+      followingProfileId: sessionProfile.id,
+      followedProfileId: profileIdToFollow,
+    },
+  });
+}
+
+export async function unfollowProfile(profileIdToFollow: string) {
+  const sessionProfile = await prisma.profile.findFirstOrThrow({
+    where: { email: await getSessionEmailOrThrow() },
+  });
+  await prisma.follower.deleteMany({
+    where: {
+      followingProfileEmail: sessionProfile.email,
+      followingProfileId: sessionProfile.id,
+    },
+  });
+}

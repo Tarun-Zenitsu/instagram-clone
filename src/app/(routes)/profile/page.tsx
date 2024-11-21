@@ -14,7 +14,13 @@ const ProfilePage = async () => {
   if (!profile) {
     return redirect("/settings");
   }
-  return <ProfilePageContent profile={profile} isOurProfile={true} />;
+  return (
+    <ProfilePageContent
+      profile={profile}
+      isOurProfile={true}
+      ourFollow={null}
+    />
+  );
 };
 
 export default ProfilePage;

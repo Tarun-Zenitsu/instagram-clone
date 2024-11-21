@@ -1,15 +1,19 @@
-import { Profile } from "@prisma/client";
-import { CheckIcon, ChevronLeft, Settings } from "lucide-react";
+import { Follower, Profile } from "@prisma/client";
+import { CheckIcon, ChevronLeft, Settings, UserPlus } from "lucide-react";
 import Link from "next/link";
 import React, { Suspense } from "react";
 import ProfilePosts from "./ProfilePost";
+import { Button } from "@radix-ui/themes";
+import FollowButton from "./FollowButton";
 
 export const ProfilePageContent = ({
   profile,
   isOurProfile = false,
+  ourFollow = null,
 }: {
   profile: Profile;
   isOurProfile?: boolean;
+  ourFollow: Follower | null;
 }) => {
   return (
     <main>
@@ -48,6 +52,12 @@ export const ProfilePageContent = ({
           contact: {profile.email}
         </p>
       </section>
+      {!isOurProfile && (
+        <section className="flex justify-center">
+          <FollowButton profileIdToFollow={profile.id} ourFollow={ourFollow} />
+        </section>
+      )}
+
       <section>
         <div className="mt-2 flex justify-center gap-2 font-bold">
           <Link href="/posts"> post</Link>
